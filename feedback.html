@@ -58,7 +58,7 @@
 </head>
 <body>
   <div class="container">
-    <h2>Feedback Form</h2>
+    <h2>College Feedback Form</h2>
     <form id="complaintForm">
       <label>Name:</label>
       <input type="text" id="name" required>
@@ -82,9 +82,32 @@
       <label>Description:</label>
       <textarea id="desc" required></textarea>
 
-      <button type="submit">Submit Complaint</button>
+      <button type="submit">Submit Feedback</button>
     </form>
   </div>
 
-  </body>
+  <script>
+    document.getElementById("Feedback Form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const complaint = {
+        name: document.getElementById("name").value,
+        roll: document.getElementById("roll").value,
+        room: document.getElementById("room").value,
+        type: document.getElementById("type").value,
+        desc: document.getElementById("desc").value,
+        date: new Date().toLocaleString()
+      };
+
+      let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+      complaints.push(complaint);
+      localStorage.setItem("Feedback", JSON.stringify(complaints));
+
+      alert("Feedback submitted successfully!");
+
+      // Optional: Clear form
+      this.reset();
+    });
+  </script>
+</body>
 </html>
