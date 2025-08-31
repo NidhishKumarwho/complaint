@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Admin - View Complaints</title>
+  <meta charset="UTF-8">
+  <title>Admin - Complaints & Feedback</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -50,18 +51,18 @@
       cursor: pointer;
     }
 
-    .upload-label {
-      color: #333;
-      font-size: 14px;
-    }
-
     .section {
       margin-bottom: 60px;
+    }
+
+    .center {
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
+  <!-- Complaints Section -->
   <div class="section">
     <h2>Complaints Received</h2>
     <table id="complaintsTable">
@@ -80,6 +81,7 @@
     </table>
   </div>
 
+  <!-- Feedback Section -->
   <div class="section">
     <h2>Feedback Received</h2>
     <table id="feedbackTable">
@@ -89,12 +91,14 @@
           <th>Roll.No</th>
           <th>Feedback</th>
           <th>Date</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
   </div>
 
+  <!-- Solved Complaints Section -->
   <div class="section">
     <h2>Complaints Solved</h2>
     <table id="solvedTable">
@@ -106,6 +110,7 @@
           <th>Type</th>
           <th>Description</th>
           <th>Date</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -121,6 +126,7 @@
     const feedbackTbody = document.querySelector("#feedbackTable tbody");
     const solvedTbody = document.querySelector("#solvedTable tbody");
 
+    // Render Complaints
     function renderComplaints() {
       complaintsTbody.innerHTML = "";
       if (complaints.length === 0) {
@@ -128,7 +134,7 @@
         const cell = row.insertCell();
         cell.colSpan = 7;
         cell.textContent = "No complaints found.";
-        cell.style.textAlign = "center";
+        cell.className = "center";
       } else {
         complaints.forEach((c, index) => {
           const row = complaintsTbody.insertRow();
@@ -161,16 +167,14 @@
             const file = fileInput.files[0];
             if (file && file.type.startsWith("image/")) {
               if (confirm("Are you sure you want to delete this complaint?")) {
-                // Move to solvedComplaints
+                // Move to solved
                 solvedComplaints.push(c);
-                localStorage.setItem("solvedComplaints", JSON.stringify(solvedComplaints));
-
-                // Remove from complaints
                 complaints.splice(index, 1);
+                localStorage.setItem("solvedComplaints", JSON.stringify(solvedComplaints));
                 localStorage.setItem("complaints", JSON.stringify(complaints));
                 renderComplaints();
                 renderSolved();
-                alert("Complaint deleted and moved to 'Complaints Solved'.");
+                alert("Complaint moved to 'Complaints Solved'.");
               }
             } else {
               alert("Please upload a valid image file.");
@@ -180,35 +184,53 @@
       }
     }
 
+    // Render Feedback
     function renderFeedback() {
       feedbackTbody.innerHTML = "";
       if (feedback.length === 0) {
         const row = feedbackTbody.insertRow();
         const cell = row.insertCell();
-        cell.colSpan = 4;
+        cell.colSpan = 5;
         cell.textContent = "No feedback available.";
-        cell.style.textAlign = "center";
+        cell.className = "center";
       } else {
-        feedback.forEach(f => {
+        feedback.forEach((f, index) => {
           const row = feedbackTbody.insertRow();
           row.insertCell().textContent = f.name;
           row.insertCell().textContent = f.roll;
           row.insertCell().textContent = f.message;
           row.insertCell().textContent = f.date;
+
+          const deleteCell = row.insertCell();
+          const deleteBtn = document.createElement("button");
+          deleteBtn.textContent = "Delete";
+          deleteBtn.className = "delete-btn";
+
+          deleteBtn.onclick = () => {
+            if (confirm("Are you sure you want to delete this feedback?")) {
+              feedback.splice(index, 1);
+              localStorage.setItem("feedback", JSON.stringify(feedback));
+              renderFeedback();
+              alert("Feedback deleted successfully.");
+            }
+          };
+
+          deleteCell.appendChild(deleteBtn);
         });
       }
     }
 
+    // Render Solved Complaints
     function renderSolved() {
       solvedTbody.innerHTML = "";
       if (solvedComplaints.length === 0) {
         const row = solvedTbody.insertRow();
         const cell = row.insertCell();
-        cell.colSpan = 6;
+        cell.colSpan = 7;
         cell.textContent = "No complaints marked as solved.";
-        cell.style.textAlign = "center";
+        cell.className = "center";
       } else {
-        solvedComplaints.forEach(c => {
+        solvedComplaints.forEach((c, index) => {
           const row = solvedTbody.insertRow();
           row.insertCell().textContent = c.name;
           row.insertCell().textContent = c.roll;
@@ -216,11 +238,27 @@
           row.insertCell().textContent = c.type;
           row.insertCell().textContent = c.desc;
           row.insertCell().textContent = c.date;
+
+          const deleteCell = row.insertCell();
+          const deleteBtn = document.createElement("button");
+          deleteBtn.textContent = "Delete";
+          deleteBtn.className = "delete-btn";
+
+          deleteBtn.onclick = () => {
+            if (confirm("Are you sure you want to permanently delete this solved complaint?")) {
+              solvedComplaints.splice(index, 1);
+              localStorage.setItem("solvedComplaints", JSON.stringify(solvedComplaints));
+              renderSolved();
+              alert("Solved complaint deleted.");
+            }
+          };
+
+          deleteCell.appendChild(deleteBtn);
         });
       }
     }
 
-    // Initial render
+    // Initial Render
     renderComplaints();
     renderFeedback();
     renderSolved();
