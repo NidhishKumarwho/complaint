@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Login Page with Admin Button</title>
   <style>
- header {
+    header {
       background-color: green;
       color: white;
       padding: 20px;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    header img {
+      height: 50px;
+      width: auto;
+      border-radius: 5px;
+    }
+    header h1 {
+      font-size: 24px;
+      margin: 0;
+      font-weight: 700;
+      font-family: 'Arial', sans-serif;
+      user-select: none;
     }
 
     body {
@@ -19,7 +35,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: calc(100vh - 90px); /* header height + padding */
+      flex-direction: column;
     }
 
     .login-container {
@@ -90,14 +107,19 @@
   </style>
 </head>
 <body>
+  <header>
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/48/Sri_Shakthi_College_of_Engineering_and_Technology_logo.png/220px-Sri_Shakthi_College_of_Engineering_and_Technology_logo.png" alt="Sri Shakthi College Logo" />
+    <h1>Sri Shakthi College</h1>
+  </header>
+
   <div class="login-container">
     <h2>Login</h2>
     <!-- Regular Login Form -->
     <form onsubmit="return handleUserLogin(event)">
-      <input type="text" id="username" placeholder="Email-id" required><br>
+      <input type="text" id="username" placeholder="Email-id" required /><br />
 
       <div class="password-container">
-        <input type="password" id="password" placeholder="Password" required>
+        <input type="password" id="password" placeholder="Password" required />
         <span class="toggle-eye" onclick="togglePassword()">👁️</span>
       </div>
 
@@ -146,11 +168,5 @@
       }
     }
   </script>
-
 </body>
 </html>
-
-
-
-
-
