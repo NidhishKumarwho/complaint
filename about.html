@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SRI SHAKTHI College</title>
+  <link href="https://imgs.search.brave.com/rRAfnijf4m56yaahRQrUoSe_3RbBJLDB9JGLkJfyDU0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL2NvbXAv/Y29pbWJhdG9yZS9z/Ni8wNDIycHg0MjIu/eDQyMi4xNjEyMDUx/MTE4MzAuZTVzNi9j/YXRhbG9ndWUvc3Jp/LXNoYWt0aGktaW5z/dGl0dXRlLW9mLWVu/Z2luZWVyaW5nLWFu/ZC10ZWNobm9sb2d5/LW15bGFtcGF0dGkt/Y29pbWJhdG9yZS1j/b2xsZWdlcy0zZ3Ax/d3o1Z3dhLmpwZz93/PTM4NDAmcT03NQ" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --accent: #3498db;
+      --light: #f4f4f4;
+      --dark: #1a252f;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: #333;
+    }
+
+    header {
+      background: url('https://imgs.search.brave.com/SsyAZD3u1L2sXKyP4vCA1_ay4dSPxFWJqVYN1fQZ_50/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL2NvbXAv/Y29pbWJhdG9yZS9z/Ni8wNDIycHg0MjIu/eDQyMi4xNjEyMDUx/MTE4MzAuZTVzNi9j/YXRhbG9ndWUvc3Jp/LXNoYWt0aGktaW5z/dGl0dXRlLW9mLWVu/Z2luZWVyaW5nLWFu/ZC10ZWNobm9sb2d5/LW15bGFtcGF0dGkt/Y29pbWJhdG9yZS1j/b2xsZWdlcy0zZ3Ax/d3o1Z3dhLmpwZz93/PTM4NDAmcT03NQ') no-repeat center center/cover;
+      height: 100vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      z-index: 2;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      z-index: 2;
+    }
+
+    nav {
+      background-color: var(--primary);
+      padding: 15px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .courses {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .course {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 280px;
+      transition: transform 0.3s;
+    }
+
+    .course:hover {
+      transform: translateY(-5px);
+    }
+
+    footer {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #217dbb;
+    }
+
+    /* Login Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .modal input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+      margin-top: -10px;
+      margin-right: -10px;
+    }
+
+    @media (max-width: 768px) {
+      .courses {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav ul {
+        flex-direction: column;
+        background-color: var(--primary);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        display: none;
+      }
+
+      nav ul.active {
+        display: block;
+      }
+
+      nav .menu-toggle {
+        display: block;
+        cursor: pointer;
+        color: white;
+      }
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">
+  <img src="http://www.iccci.in/images/logo/siet-logo.png" alt="Sri Shakthi Logo" style="height: 40px; vertical-align: middle; margin-right: 10px;">
+  <span style="vertical-align: ;">Sri Shakthi University</span>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="complaint.html">Complaint</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="home">
+    <h1>Welcome to Sri Shakthi University</h1>
+    <p>Powering the Youth, Empowering the Nation</p>
+  </header>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>SRI SHAKTHI College is a leading institution that combines world-class education with rich traditions. With state-of-the-art infrastructure, experienced faculty, and a strong focus on innovation, we prepare students to thrive in a competitive global environment.</p>
+    <p>We offer a wide range of undergraduate and postgraduate programs across disciplines like Engineering, Science, Commerce, and Arts.</p>
+  </section>
+
+  <!-- Courses Section -->
+  <section id="courses">
+    <h2>Our Courses</h2>
+    <div class="courses">
+      <div class="course">
+        <h3>Computer Science</h3>
+        <p>Advanced curriculum focusing on AI, ML, Data Science, and Software Development.</p>
+      </div>
+      <div class="course">
+        <h3>Mechanical Engineering</h3>
+        <p>Hands-on experience in CAD, Robotics, Thermodynamics, and Manufacturing Tech.</p>
+      </div>
+      <div class="course">
+        <h3>Business Administration</h3>
+        <p>Training future leaders in finance, marketing, HR, and entrepreneurship.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>📍 <a href="https://maps.app.goo.gl/bUYAG51rqrZLJ22w6">For Location Click Here!</a></p>
+    <p>📞 +91 99999 99999</p>
+    <p>📧 contact@srishakthi.edu.in</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 SRI SHAKTHI UNIVERSITY. All Rights Reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function openLogin() {
+      document.getElementById('loginModal').style.display = 'flex';
+    }
+
+    function closeLogin() {
+      document.getElementById('loginModal').style.display = 'none';
+    }
+
+    function login() {
+      const id = document.getElementById('studentID').value;
+      const pass = document.getElementById('password').value;
+      if (id && pass) {
+        alert("Login successful!\nWelcome " + id);
+        closeLogin();
+      } else {
+        alert("Please enter both Student ID and Password.");
+      }
+    }
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
