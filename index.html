@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -260,9 +260,19 @@
       const loginStatus = document.getElementById("loginStatus");
 
       if (user && userType === "student") {
-        // Replace "Login" with the student's profile
+        // Load updated profile data
+        const profileJSON = localStorage.getItem("studentProfile_" + user);
+        let displayName = user;
+
+        if (profileJSON) {
+          const profile = JSON.parse(profileJSON);
+          if (profile.name && profile.name.trim() !== "") {
+            displayName = profile.name;
+          }
+        }
+
         loginStatus.innerHTML = `
-          <a href="student.html">👤 ${user}</a>
+          <a href="student.html">👤 ${displayName}</a>
           <a href="#" onclick="logout()" style="margin-left:10px; color:#f00;">Logout</a>
         `;
       }
