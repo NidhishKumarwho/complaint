@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .profile-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .logout-btn {
+      background-color: #e74c3c;
+    }
+
+    .logout-btn:hover {
+      background-color: #c0392b;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+    <h1>Student Profile</h1>
+
+    <img id="profilePic" class="profile-pic" src="https://via.placeholder.com/120" alt="Profile Picture"><br>
+    <input type="file" id="picUpload" accept="image/*"><br>
+
+    <input type="text" id="studentName" placeholder="Name"><br>
+    <input type="email" id="studentEmail" placeholder="Email"><br>
+    <input type="tel" id="studentPhone" placeholder="Phone Number"><br>
+
+    <button onclick="saveProfile()">Save Profile</button>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    // Load profile from localStorage
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = localStorage.getItem("loggedInUser");
+      const userType = localStorage.getItem("userType");
+
+      if (!user || userType !== "student") {
+        alert("Unauthorized access. Please login as a student.");
+        window.location.href = "login.html";
+        return;
+      }
+
+      const profile = JSON.parse(localStorage.getItem("studentProfile_" + user)) || {
+        name: user,
+        email: user + "@srishakthi.edu.in",
+        phone: "",
+        pic: ""
+      };
+
+      document.getElementById("studentName").value = profile.name;
+      document.getElementById("studentEmail").value = profile.email;
+      document.getElementById("studentPhone").value = profile.phone;
+
+      if (profile.pic) {
+        document.getElementById("profilePic").src = profile.pic;
+      }
+
+      document.getElementById("picUpload").addEventListener("change", function (e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            document.getElementById("profilePic").src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+
+    function saveProfile() {
+      const user = localStorage.getItem("loggedInUser");
+
+      const profile = {
+        name: document.getElementById("studentName").value,
+        email: document.getElementById("studentEmail").value,
+        phone: document.getElementById("studentPhone").value,
+        pic: document.getElementById("profilePic").src
+      };
+
+      localStorage.setItem("studentProfile_" + user, JSON.stringify(profile));
+      alert("Profile updated successfully!");
+
+      // Redirect to homepage
+      window.location.href = "index.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      localStorage.removeItem("userType");
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
