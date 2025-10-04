@@ -2,15 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login Page with Admin Button</title>
+  <title>Login Page</title>
   <style>
- header {
-      background-color: green;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-
     body {
       margin: 0;
       padding: 0;
@@ -35,33 +28,12 @@
       margin-bottom: 20px;
     }
 
-    .login-container input[type="text"],
-    .login-container input[type="password"] {
+    .login-container input {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
-      box-sizing: border-box;
-    }
-
-    .password-container {
-      position: relative;
-    }
-
-    .password-container input {
-      padding-right: 40px;
-    }
-
-    .toggle-eye {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 18px;
-      color: #555;
-      user-select: none;
     }
 
     .login-container button {
@@ -80,72 +52,71 @@
     }
 
     .admin-btn {
-      margin-top: 20px;
+      margin-top: 15px;
       background-color: #28a745;
     }
 
     .admin-btn:hover {
       background-color: #218838;
     }
+
+    .toggle-eye {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .password-container {
+      position: relative;
+    }
   </style>
 </head>
 <body>
   <div class="login-container">
     <h2>Login</h2>
-    <!-- Regular Login Form -->
     <form onsubmit="return handleUserLogin(event)">
-      <input type="text" id="username" placeholder="Username" required><br>
-
+      <input type="text" id="username" placeholder="Username" required>
       <div class="password-container">
         <input type="password" id="password" placeholder="Password" required>
         <span class="toggle-eye" onclick="togglePassword()">👁️</span>
       </div>
-
-      <button type="submit">Login</button>
+      <button type="submit">Login as Student</button>
     </form>
-
-    <!-- Admin Button -->
     <button class="admin-btn" onclick="handleAdminLogin()">Enter as Admin</button>
   </div>
 
   <script>
-    // Toggle password visibility
     function togglePassword() {
-      const passwordInput = document.getElementById("password");
-      const toggleIcon = document.querySelector(".toggle-eye");
-
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        toggleIcon.textContent = "🙈";
-      } else {
-        passwordInput.type = "password";
-        toggleIcon.textContent = "👁️";
-      }
+      const password = document.getElementById("password");
+      password.type = password.type === "password" ? "text" : "password";
     }
 
-    // Handle user login
     function handleUserLogin(event) {
-      event.preventDefault(); // prevent page reload
+      event.preventDefault();
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
 
-      // Just a placeholder – in real cases you'd validate
-      alert("Welcome " + username + "!");
-      window.location.href = "index.html"; // Redirect
-      return false;
+      if (username && password) {
+        localStorage.setItem("loggedInUser", username);
+        localStorage.setItem("userType", "student");
+        alert("Welcome, " + username + "!");
+        window.location.href = "index.html";
+      }
     }
 
-    // Handle admin button click
     function handleAdminLogin() {
       const adminPassword = prompt("Enter Admin Password:");
       if (adminPassword === "admin123") {
+        localStorage.setItem("loggedInUser", "Admin");
+        localStorage.setItem("userType", "admin");
         alert("Welcome, Admin!");
-        window.location.href = "admin.html"; // Redirect to admin page
+        window.location.href = "admin.html";
       } else if (adminPassword !== null) {
         alert("Incorrect Admin Password!");
       }
     }
   </script>
-
 </body>
 </html>
