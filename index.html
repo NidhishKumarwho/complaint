@@ -48,14 +48,9 @@
       z-index: 1;
     }
 
-    header h1 {
-      font-size: 3rem;
-      z-index: 2;
-    }
-
+    header h1,
     header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
+      position: relative;
       z-index: 2;
     }
 
@@ -74,11 +69,19 @@
       color: white;
       font-size: 1.5rem;
       font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+    nav .logo img {
+      height: 40px;
+      margin-right: 10px;
     }
 
     nav ul {
       list-style: none;
       display: flex;
+      align-items: center;
     }
 
     nav ul li {
@@ -153,49 +156,13 @@
       background-color: #217dbb;
     }
 
-    /* Login Modal */
-    .modal {
+    .menu-toggle {
       display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .modal-content {
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    .modal input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-
-    .close-btn {
-      float: right;
       cursor: pointer;
-      font-size: 20px;
-      margin-top: -10px;
-      margin-right: -10px;
+      color: white;
     }
 
     @media (max-width: 768px) {
-      .courses {
-        flex-direction: column;
-        align-items: center;
-      }
-
       nav ul {
         flex-direction: column;
         background-color: var(--primary);
@@ -210,15 +177,9 @@
         display: block;
       }
 
-      nav .menu-toggle {
+      .menu-toggle {
         display: block;
-        cursor: pointer;
-        color: white;
       }
-    }
-
-    .menu-toggle {
-      display: none;
     }
   </style>
 </head>
@@ -227,8 +188,9 @@
   <!-- Navigation -->
   <nav>
     <div class="logo">
-  <img src="http://www.iccci.in/images/logo/siet-logo.png" alt="Sri Shakthi Logo" style="height: 40px; vertical-align: middle; margin-right: 10px;">
-  <span style="vertical-align: ;">Sri Shakthi University</span>
+      <img src="http://www.iccci.in/images/logo/siet-logo.png" alt="Sri Shakthi Logo">
+      Sri Shakthi University
+    </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
     <ul id="navLinks">
       <li><a href="#home">Home</a></li>
@@ -237,7 +199,7 @@
       <li><a href="#contact">Contact</a></li>
       <li><a href="complaint.html">Complaint</a></li>
       <li><a href="feedback.html">Feedback</a></li>
-      <li><a href="login.html">Login</a></li>
+      <li id="loginStatus"><a href="login.html">Login</a></li>
     </ul>
   </nav>
 
@@ -286,29 +248,30 @@
     &copy; 2025 SRI SHAKTHI UNIVERSITY. All Rights Reserved.
   </footer>
 
-  <!-- Scripts -->
+  <!-- JavaScript for login status and menu toggle -->
   <script>
-    function openLogin() {
-      document.getElementById('loginModal').style.display = 'flex';
-    }
-
-    function closeLogin() {
-      document.getElementById('loginModal').style.display = 'none';
-    }
-
-    function login() {
-      const id = document.getElementById('studentID').value;
-      const pass = document.getElementById('password').value;
-      if (id && pass) {
-        alert("Login successful!\nWelcome " + id);
-        closeLogin();
-      } else {
-        alert("Please enter both Student ID and Password.");
-      }
-    }
-
     function toggleMenu() {
       document.getElementById('navLinks').classList.toggle('active');
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const user = localStorage.getItem("loggedInUser");
+      const userType = localStorage.getItem("userType");
+      const loginStatus = document.getElementById("loginStatus");
+
+      if (user && userType === "student") {
+        // Replace "Login" with the student's profile
+        loginStatus.innerHTML = `
+          <a href="student .html">👤 ${user}</a>
+          <a href="#" onclick="logout()" style="margin-left:10px; color:#f00;">Logout</a>
+        `;
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      localStorage.removeItem("userType");
+      window.location.href = "login.html";
     }
   </script>
 </body>
