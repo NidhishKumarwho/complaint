@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page with Transparent Background</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      background: linear-gradient(to top, #0f2027, #203a43, #2c5364);
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    body {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
     }
 
+    /* Transparent Login Box with Glass Effect */
     .login-container {
-      background-color: #fff;
+      position: relative;
+      z-index: 1;
+      background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent */
       padding: 30px 40px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      backdrop-filter: blur(10px); /* Frosted glass effect */
+      -webkit-backdrop-filter: blur(10px); /* Safari support */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
       width: 300px;
+      text-align: center;
+      color: white;
     }
 
     .login-container h2 {
@@ -32,8 +54,14 @@
       width: 100%;
       padding: 10px;
       margin: 10px 0;
-      border: 1px solid #ccc;
+      border: none;
       border-radius: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    .login-container input::placeholder {
+      color: #ddd;
     }
 
     .login-container button {
@@ -66,6 +94,7 @@
       top: 50%;
       transform: translateY(-50%);
       cursor: pointer;
+      color: white;
     }
 
     .password-container {
@@ -74,19 +103,25 @@
   </style>
 </head>
 <body>
+
+  <!-- Canvas Background -->
+  <canvas id="background"></canvas>
+
+  <!-- Login Form -->
   <div class="login-container">
     <h2>Login</h2>
     <form onsubmit="return handleUserLogin(event)">
       <input type="text" id="username" placeholder="Username" required>
       <div class="password-container">
         <input type="password" id="password" placeholder="Password" required>
-        <span class="toggle-eye" onclick="togglePassword()">👁️</span>
+        <span class="toggle-eye" onclick="togglePassword()"></span>
       </div>
       <button type="submit">Login as Student</button>
     </form>
     <button class="admin-btn" onclick="handleAdminLogin()">Enter as Admin</button>
   </div>
 
+  <!-- JavaScript -->
   <script>
     function togglePassword() {
       const password = document.getElementById("password");
@@ -117,6 +152,66 @@
         alert("Incorrect Admin Password!");
       }
     }
+
+    // Background Animation (Upward Moving Dots)
+    const canvas = document.getElementById("background");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const particles = [];
+    const numParticles = 100;
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedY = Math.random() * 1 + 0.5;
+      }
+
+      update() {
+        this.y -= this.speedY;
+        if (this.y + this.size < 0) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      for (let i = 0; i < numParticles; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    initParticles();
+    animateParticles();
   </script>
 </body>
 </html>
