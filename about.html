@@ -15,16 +15,8 @@
       --card-bg: #ffffff;
       --gradient: linear-gradient(135deg, #004aad, #0072ff);
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--light);
-      color: var(--dark);
-    }
-
-    /* --- Navbar --- */
+    body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); }
     nav {
       position: fixed;
       width: 100%;
@@ -37,38 +29,11 @@
       z-index: 1000;
       backdrop-filter: blur(10px);
     }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      font-weight: 600;
-      font-size: 1.4rem;
-    }
-
-    .logo img {
-      height: 45px;
-      margin-right: 10px;
-      border-radius: 8px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 25px;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    nav ul li a:hover {
-      color: var(--accent);
-    }
-
-    /* --- Hero Section --- */
+    .logo { display: flex; align-items: center; font-weight: 600; font-size: 1.4rem; }
+    .logo img { height: 45px; margin-right: 10px; border-radius: 8px; }
+    nav ul { list-style: none; display: flex; gap: 25px; }
+    nav ul li a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    nav ul li a:hover { color: var(--accent); }
     header {
       height: 100vh;
       background: url('https://imgs.search.brave.com/SsyAZD3u1L2sXKyP4vCA1_ay4dSPxFWJqVYN1fQZ_50/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL2NvbXAv/Y29pbWJhdG9yZS9z/Ni8wNDIycHg0MjIu/eDQyMi4xNjEyMDUx/MTE4MzAuZTVzNi9j/YXRhbG9ndWUvc3Jp/LXNoYWt0aGktaW5z/dGl0dXRlLW9mLWVu/Z2luZWVyaW5nLWFu/ZC10ZWNobm9sb2d5/LW15bGFtcGF0dGkt/Y29pbWJhdG9yZS1j/b2xsZWdlcy0zZ3Ax/d3o1Z3dhLmpwZz93/PTM4NDAmcT03NQ') no-repeat center center/cover;
@@ -80,31 +45,10 @@
       color: white;
       position: relative;
     }
-
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 0;
-    }
-
-    header h1, header p {
-      position: relative;
-      z-index: 2;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      letter-spacing: 1px;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
-    }
-
+    header::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 0; }
+    header h1, header p { position: relative; z-index: 2; }
+    header h1 { font-size: 3rem; letter-spacing: 1px; }
+    header p { font-size: 1.2rem; margin-top: 10px; }
     .btn {
       margin-top: 20px;
       background: var(--gradient);
@@ -116,85 +60,32 @@
       font-weight: 600;
       transition: transform 0.3s, box-shadow 0.3s;
     }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
-
-    /* --- Section Layout --- */
-    section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    section h2 {
-      text-align: center;
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-      color: var(--primary);
-      position: relative;
-    }
-
-    section h2::after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 3px;
-      background: var(--accent);
-      margin: 10px auto;
-      border-radius: 2px;
-    }
-
-    /* --- Courses --- */
-    .courses {
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      flex-wrap: wrap;
-    }
-
-    .course {
-      background: var(--card-bg);
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      padding: 25px;
-      width: 300px;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .course:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-
-    .course h3 {
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-
-    /* --- Chart Section (Admin Dashboard Example) --- */
-    #stats {
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+    section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+    section h2 { text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: var(--primary); position: relative; }
+    section h2::after { content: ''; display: block; width: 80px; height: 3px; background: var(--accent); margin: 10px auto; border-radius: 2px; }
+    .courses { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+    .course { background: var(--card-bg); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 25px; width: 300px; transition: transform 0.3s, box-shadow 0.3s; }
+    .course:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    .course h3 { color: var(--primary); margin-bottom: 10px; }
+    #stats { background: #fff; border-radius: 15px; padding: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center; }
+    canvas { margin-top: 20px; max-width: 600px; }
+    footer { background: var(--dark); color: white; text-align: center; padding: 25px; margin-top: 60px; }
+    /* Login Form */
+    #loginForm {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 30px;
       background: #fff;
-      border-radius: 15px;
-      padding: 40px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     }
-
-    canvas {
-      margin-top: 20px;
-      max-width: 600px;
-    }
-
-    /* --- Footer --- */
-    footer {
-      background: var(--dark);
-      color: white;
-      text-align: center;
-      padding: 25px;
-      margin-top: 60px;
+    #loginForm input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
@@ -210,9 +101,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#courses">Courses</a></li>
       <li><a href="#stats">Stats</a></li>
-      <li><a href="complaint.html">Complaint</a></li>
-      <li><a href="feedback.html">Feedback</a></li>
-      <li><a id="loginLink" href="login.html">Login</a></li>
+      <li><a id="loginLink" href="#">Login</a></li>
     </ul>
   </nav>
 
@@ -256,19 +145,65 @@
     <canvas id="complaintChart"></canvas>
   </section>
 
+  <!-- Login Form -->
+  <section id="loginSection">
+    <h2>Student Login</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Enter your name" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit" class="btn">Login</button>
+    </form>
+  </section>
+
   <footer>
     &copy; 2025 Sri Shakthi University | Designed with ❤️ by Students
   </footer>
 
-  <!-- JavaScript -->
+  <!-- JS -->
   <script>
-    // Update navbar login link based on logged-in user
-    const loggedInUser = localStorage.getItem("loggedInUser");
     const loginLink = document.getElementById("loginLink");
-    if (loggedInUser) {
-      loginLink.textContent = loggedInUser; // Show student/admin name
-      loginLink.href = "#"; // Optionally link to profile page
+    const loginForm = document.getElementById("loginForm");
+    const loginSection = document.getElementById("loginSection");
+
+    // Check login state
+    function updateNavbar() {
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      if (loggedInUser) {
+        loginLink.textContent = loggedInUser;
+        loginLink.href = "#";
+        loginLink.style.cursor = "pointer";
+        loginLink.title = "Click to logout";
+        loginLink.onclick = () => {
+          if (confirm("Do you want to logout?")) {
+            localStorage.removeItem("loggedInUser");
+            alert("Logged out successfully!");
+            location.reload();
+          }
+        };
+        loginSection.style.display = "none"; // hide login form
+      } else {
+        loginLink.textContent = "Login";
+        loginLink.href = "#loginSection";
+        loginSection.style.display = "block"; // show login form
+      }
     }
+
+    updateNavbar();
+
+    // Handle login
+    loginForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      if(username && password){
+        localStorage.setItem("loggedInUser", username);
+        alert("Login successful!");
+        updateNavbar();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert("Please enter username and password.");
+      }
+    });
 
     // Chart.js for complaints
     const ctx = document.getElementById('complaintChart').getContext('2d');
