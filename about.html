@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sri Shakthi University</title>
+  <title>Public Grievance Portal | Government of India</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
@@ -16,7 +16,14 @@
       --gradient: linear-gradient(135deg, #004aad, #0072ff);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body { font-family: 'Poppins', sans-serif; background: var(--light); color: var(--dark); }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+    }
+
+    /* --- Navbar (unchanged) --- */
     nav {
       position: fixed;
       width: 100%;
@@ -29,14 +36,28 @@
       z-index: 1000;
       backdrop-filter: blur(10px);
     }
-    .logo { display: flex; align-items: center; font-weight: 600; font-size: 1.4rem; }
-    .logo img { height: 45px; margin-right: 10px; border-radius: 8px; }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+    .logo img {
+      height: 45px;
+      margin-right: 10px;
+      border-radius: 8px;
+    }
     nav ul { list-style: none; display: flex; gap: 25px; }
-    nav ul li a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    nav ul li a {
+      color: white; text-decoration: none; font-weight: 500;
+      transition: color 0.3s;
+    }
     nav ul li a:hover { color: var(--accent); }
+
+    /* --- Hero Section --- */
     header {
       height: 100vh;
-      background: url('https://imgs.search.brave.com/SsyAZD3u1L2sXKyP4vCA1_ay4dSPxFWJqVYN1fQZ_50/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jb250/ZW50LmpkbWFnaWNi/b3guY29tL2NvbXAv/Y29pbWJhdG9yZS9z/Ni8wNDIycHg0MjIu/eDQyMi4xNjEyMDUx/MTE4MzAuZTVzNi9j/YXRhbG9ndWUvc3Jp/LXNoYWt0aGktaW5z/dGl0dXRlLW9mLWVu/Z2luZWVyaW5nLWFu/ZC10ZWNobm9sb2d5/LW15bGFtcGF0dGkt/Y29pbWJhdG9yZS1j/b2xsZWdlcy0zZ3Ax/d3o1Z3dhLmpwZz93/PTM4NDAmcT03NQ') no-repeat center center/cover;
+      background: url('https://static.theprint.in/wp-content/uploads/2022/08/Feature-Image-6-3.jpg') no-repeat center center/cover;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -45,10 +66,18 @@
       color: white;
       position: relative;
     }
-    header::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 0; }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 0;
+    }
     header h1, header p { position: relative; z-index: 2; }
     header h1 { font-size: 3rem; letter-spacing: 1px; }
     header p { font-size: 1.2rem; margin-top: 10px; }
+
     .btn {
       margin-top: 20px;
       background: var(--gradient);
@@ -60,37 +89,96 @@
       font-weight: 600;
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-    section { padding: 80px 20px; max-width: 1200px; margin: auto; }
-    section h2 { text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: var(--primary); position: relative; }
-    section h2::after { content: ''; display: block; width: 80px; height: 3px; background: var(--accent); margin: 10px auto; border-radius: 2px; }
-    .courses { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
-    .course { background: var(--card-bg); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); padding: 25px; width: 300px; transition: transform 0.3s, box-shadow 0.3s; }
-    .course:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-    .course h3 { color: var(--primary); margin-bottom: 10px; }
-    #stats { background: #fff; border-radius: 15px; padding: 40px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center; }
-    canvas { margin-top: 20px; max-width: 600px; }
-    footer { background: var(--dark); color: white; text-align: center; padding: 25px; margin-top: 60px; }
-    /* Login Form */
-    #loginForm {
-      max-width: 400px;
-      margin: 20px auto;
-      padding: 30px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
-    #loginForm input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      color: var(--primary);
+      position: relative;
+    }
+    section h2::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    /* --- Officials Section --- */
+    .officials {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .official {
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 25px;
+      width: 270px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .official:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .official img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+    .official h3 { color: var(--primary); margin-bottom: 5px; }
+    .official p { font-size: 0.9rem; color: #555; }
+
+    /* --- Complaint Categories --- */
+    .courses {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .course {
+      background: var(--card-bg);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 25px;
+      width: 300px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .course:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .course h3 { color: var(--primary); margin-bottom: 10px; }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 25px;
+      margin-top: 60px;
     }
   </style>
 </head>
+
 <body>
-  <!-- Navbar -->
+  <!-- Navbar (kept same as given) -->
   <nav>
     <div class="logo">
       <img src="https://images.shiksha.com/mediadata/images/1713871716phpCxevho.jpeg" alt="logo">
@@ -108,121 +196,79 @@
 
   <!-- Hero -->
   <header id="home">
-    <h1>Welcome to Sri Shakthi University</h1>
-    <p>Empowering Future Innovators through Knowledge & Technology</p>
+    <h1>Public Grievance Redressal Portal</h1>
+    <p>Empowering Citizens to Report and Resolve Local Issues Transparently</p>
     <button class="btn" onclick="document.querySelector('#about').scrollIntoView({behavior:'smooth'})">Explore More</button>
   </header>
 
   <!-- About -->
   <section id="about">
-    <h2>About Us</h2>
+    <h2>About the Portal</h2>
     <p style="text-align:center; max-width:800px; margin:auto;">
-      Sri Shakthi University stands as a beacon of innovation and excellence, offering globally recognized education in technology, science, and business. Our focus on research, creativity, and sustainability prepares students to lead tomorrow’s world.
+      The <b>Public Grievance Redressal Portal</b> is a government initiative allowing citizens to report local issues such as damaged roads, water supply failures, streetlight outages, or sanitation problems.
+      It ensures <b>transparency, accountability,</b> and a <b>timely response</b> from responsible authorities.
     </p>
   </section>
 
-  <!-- Courses -->
-  <section id="courses">
-    <h2>Our Top Courses</h2>
-    <div class="courses">
-      <div class="course">
-        <h3>Computer Science</h3>
-        <p>Learn AI, ML, Data Science, and Software Engineering from industry mentors.</p>
+  <!-- Officials Section -->
+  <section id="officials">
+    <h2>Government Leadership</h2>
+    <div class="officials">
+      <div class="official">
+        <img src="http://imageshine.in/uploads/gallery/HD-photos-of-narendra-modi-ji.jpg" alt="PM Modi">
+        <h3>Shri Narendra Modi</h3>
+        <p>Prime Minister of India</p>
+        <p>Leading the nation with the vision of “Sabka Saath, Sabka Vikas, Sabka Vishwas, Sabka Prayas”.</p>
       </div>
-      <div class="course">
-        <h3>Electronics Engineering</h3>
-        <p>Master IoT, VLSI, Embedded Systems, and Smart Device Integration.</p>
+
+      <div class="official">
+        <img src="https://wallpapercave.com/wp/wp11812099.jpg" alt="President Droupadi Murmu">
+        <h3>Droupadi Murmu</h3>
+        <p>President of India</p>
+        <p>The first tribal woman President of India, upholding the nation’s democratic values.</p>
       </div>
-      <div class="course">
-        <h3>Business Administration</h3>
-        <p>Grow as a leader with strategic thinking and financial intelligence.</p>
+
+      <div class="official">
+        <img src="https://lawtrend.in/wp-content/uploads/2025/05/cji-gavai-1.jpg" alt="B.R.Gavai">
+        <h3>B.R. Gavai</h3>
+        <p>Chief Justice of India</p>
+        <p>Ensuring justice and equality under the Indian Constitution.</p>
+      </div>
+
+      <div class="official">
+        <img src="https://qrius.com/wp-content/uploads/2022/10/Shri_Amit_Shah_taking_charge_as_the_Union_Minister_for_Home_Affairs_in_New_Delhi_on_June_01_2019.jpg" alt="Amit Shah">
+        <h3>Shri Amit Shah</h3>
+        <p>Minister of Home Affairs</p>
+        <p>Strengthening India’s internal security and governance framework.</p>
       </div>
     </div>
   </section>
 
-  <!-- Statistics / Dashboard -->
-  <section id="stats">
-    <h2>Hostel Complaints Overview</h2>
-    <canvas id="complaintChart"></canvas>
+  <!-- Complaint Categories -->
+  <section id="courses">
+    <h2>Major Complaint Categories</h2>
+    <div class="courses">
+      <div class="course">
+        <h3>Road & Infrastructure</h3>
+        <p>Report potholes, damaged bridges, or unsafe roads in your locality.</p>
+      </div>
+      <div class="course">
+        <h3>Electricity & Water</h3>
+        <p>File complaints about power outages, line faults, or water shortages.</p>
+      </div>
+      <div class="course">
+        <h3>Cleanliness & Waste</h3>
+        <p>Raise concerns about waste management or unhygienic surroundings.</p>
+      </div>
+      <div class="course">
+        <h3>Public Safety</h3>
+        <p>Report streetlight failures or unsafe public infrastructure.</p>
+      </div>
+    </div>
   </section>
 
-
   <footer>
-    &copy; 2025 Sri Shakthi University | Designed with ❤️ by Students
+    &copy; 2025 Government of India | Public Grievance Redressal Portal
   </footer>
-
-  <!-- JS -->
-  <script>
-    const loginLink = document.getElementById("loginLink");
-    const loginForm = document.getElementById("loginForm");
-    const loginSection = document.getElementById("loginSection");
-
-    // Check login state
-    function updateNavbar() {
-      const loggedInUser = localStorage.getItem("loggedInUser");
-      if (loggedInUser) {
-        loginLink.textContent = loggedInUser;
-        loginLink.href = "#";
-        loginLink.style.cursor = "pointer";
-        loginLink.title = "Click to logout";
-        loginLink.onclick = () => {
-          if (confirm("Do you want to logout?")) {
-            localStorage.removeItem("loggedInUser");
-            alert("Logged out successfully!");
-            <li><a href="index.html"></a></li>
-          }
-        };
-        loginSection.style.display = "none"; // hide login form
-      } else {
-        loginLink.textContent = "Login";
-        loginLink.href = "login.html";
-        loginSection.style.display = "block"; // show login form
-      }
-    }
-
-    updateNavbar();
-
-    // Handle login
-    loginForm.addEventListener("submit", function(e){
-      e.preventDefault();
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      if(username && password){
-        localStorage.setItem("loggedInUser", username);
-        alert("Login successful!");
-        updateNavbar();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        alert("Please enter username and password.");
-      }
-    });
-
-    // Chart.js for complaints
-    const ctx = document.getElementById('complaintChart').getContext('2d');
-    const chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Cleanliness', 'Water', 'Electricity', 'Food', 'Others'],
-        datasets: [{
-          label: 'Complaints Received',
-          data: [12, 8, 6, 14, 3],
-          backgroundColor: ['#004aad', '#0072ff', '#f9b233', '#34d399', '#ef4444'],
-          borderRadius: 8
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: { y: { beginAtZero: true } },
-        plugins: {
-          legend: { display: false },
-          title: {
-            display: true,
-            text: 'Live Complaint Data (Demo)',
-            font: { size: 16 }
-          }
-        }
-      }
-    });
-  </script>
 </body>
 </html>
