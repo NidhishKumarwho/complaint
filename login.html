@@ -134,8 +134,11 @@
       const password = document.getElementById("password").value;
 
       if (username && password) {
+        // Save user data to localStorage
         localStorage.setItem("loggedInUser", username);
         localStorage.setItem("userType", "student");
+        localStorage.setItem("username", username); // ✅ Added line (so name appears in navbar)
+        
         alert("Welcome, " + username + "!");
         window.location.href = "about.html";
       }
@@ -146,6 +149,7 @@
       if (adminPassword === "admin123") {
         localStorage.setItem("loggedInUser", "Admin");
         localStorage.setItem("userType", "admin");
+        localStorage.setItem("username", "Admin"); // ✅ Added for consistency
         alert("Welcome, Admin!");
         window.location.href = "admin.html";
       } else if (adminPassword !== null) {
