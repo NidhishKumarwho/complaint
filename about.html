@@ -283,5 +283,19 @@
   <footer>
     &copy; 2025 Government of India | Public Grievance Redressal Portal
   </footer>
+
+  <!-- 👇 Added script to show logged-in user name -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginLink = document.getElementById('loginLink');
+      const username = localStorage.getItem('username'); // key from login page
+
+      if (username) {
+        loginLink.textContent = username;
+        loginLink.href = "#";
+        loginLink.style.fontWeight = "600";
+      }
+    });
+  </script>
 </body>
 </html>
