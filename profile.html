@@ -3,227 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Citizen Profile | India</title>
+<title>User Profile | Government of India</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  :root {
+    --primary: #004aad;
+    --accent: #f9b233;
+    --dark: #001d3d;
+    --light: #f5f7fa;
+    --gradient: linear-gradient(135deg, #004aad, #0072ff);
+  }
 
-    body {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #FF9933, #FFFFFF, #138808);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #333;
-    }
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .profile-container {
-        width: 90%;
-        max-width: 700px;
-        background: #ffffffcc;
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        box-shadow: 0 0 25px rgba(0,0,0,0.3);
-        padding: 30px 40px;
-        position: relative;
-        overflow: hidden;
-    }
+  .profile-container {
+    width: 90%;
+    max-width: 700px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    overflow: hidden;
+  }
 
-    .profile-container::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: conic-gradient(#FF9933, #FFFFFF, #138808, #000080);
-        animation: rotate 10s linear infinite;
-        opacity: 0.2;
-    }
+  .header {
+    background: var(--gradient);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+  }
 
-    @keyframes rotate {
-        from {transform: rotate(0deg);}
-        to {transform: rotate(360deg);}
-    }
+  .header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid white;
+    margin-bottom: 15px;
+    object-fit: cover;
+  }
 
-    .profile-header {
-        text-align: center;
-        z-index: 1;
-        position: relative;
-    }
+  .header h1 {
+    margin: 0;
+    font-size: 1.8em;
+  }
 
-    .profile-header h1 {
-        margin: 0;
-        font-size: 2.2em;
-        color: #000080;
-        text-shadow: 0 0 5px rgba(0,0,0,0.3);
-    }
+  .header p {
+    font-size: 1.1em;
+    color: #e0e0e0;
+  }
 
-    .profile-header h3 {
-        color: #138808;
-        margin: 5px 0 20px;
-    }
+  .details {
+    padding: 30px;
+  }
 
-    .profile-photo {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 4px solid #FF9933;
-        margin: 10px auto;
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    }
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
 
-    .profile-photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  .info-item label {
+    font-weight: 600;
+    color: var(--primary);
+  }
 
-    .info-section {
-        margin-top: 20px;
-        z-index: 1;
-        position: relative;
-    }
+  .info-item input {
+    width: 55%;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid var(--accent);
+    padding: 5px;
+    font-size: 1em;
+  }
 
-    .info-item {
-        margin: 15px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+  .info-item input:disabled {
+    border-bottom: 2px dashed #ccc;
+  }
 
-    .info-item label {
-        font-weight: 600;
-        color: #000080;
-        width: 40%;
-    }
+  .btns {
+    text-align: center;
+    margin-top: 30px;
+  }
 
-    .info-item input {
-        width: 55%;
-        padding: 8px;
-        border: none;
-        border-bottom: 2px solid #138808;
-        background: transparent;
-        font-size: 1em;
-        color: #333;
-    }
+  button {
+    background: var(--gradient);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
 
-    .info-item input:disabled {
-        border-bottom: 2px dashed #aaa;
-        color: #555;
-    }
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
 
-    .buttons {
-        text-align: center;
-        margin-top: 25px;
-    }
-
-    .buttons button {
-        padding: 10px 20px;
-        margin: 0 10px;
-        border: none;
-        border-radius: 8px;
-        font-size: 1em;
-        font-weight: bold;
-        cursor: pointer;
-        color: white;
-        transition: all 0.3s ease;
-    }
-
-    .edit-btn {
-        background: #FF9933;
-    }
-
-    .save-btn {
-        background: #138808;
-    }
-
-    .edit-btn:hover {
-        background: #ff7b00;
-        transform: scale(1.05);
-    }
-
-    .save-btn:hover {
-        background: #0f6a06;
-        transform: scale(1.05);
-    }
-
-    footer {
-        margin-top: 30px;
-        text-align: center;
-        color: #000080;
-        font-size: 0.9em;
-    }
+  footer {
+    text-align: center;
+    padding: 15px;
+    background: var(--dark);
+    color: white;
+    font-size: 0.9em;
+  }
 </style>
 </head>
+
 <body>
-
-<div class="profile-container">
-    <div class="profile-header">
-        <div class="profile-photo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Profile Photo">
-        </div>
-        <h1>Citizen Profile</h1>
-        <h3>Republic of India 🇮🇳</h3>
+  <div class="profile-container">
+    <div class="header">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="Profile Photo">
+      <!-- ✅ Username will appear here -->
+      <h1 id="usernameDisplay">Citizen Name</h1>
+      <p>Registered Citizen | Republic of India 🇮🇳</p>
     </div>
 
-    <div class="info-section">
-        <div class="info-item">
-            <label>Full Name:</label>
-            <input type="text" id="name" value="Aarav Sharma" disabled>
-        </div>
-        <div class="info-item">
-            <label>Age:</label>
-            <input type="number" id="age" value="28" disabled>
-        </div>
-        <div class="info-item">
-            <label>Aadhaar Number:</label>
-            <input type="text" id="aadhaar" value="XXXX-XXXX-1234" disabled>
-        </div>
-        <div class="info-item">
-            <label>State:</label>
-            <input type="text" id="state" value="Maharashtra" disabled>
-        </div>
-        <div class="info-item">
-            <label>Email:</label>
-            <input type="email" id="email" value="aarav.sharma@example.com" disabled>
-        </div>
-        <div class="info-item">
-            <label>Mobile:</label>
-            <input type="text" id="mobile" value="+91 9876543210" disabled>
-        </div>
-    </div>
+    <div class="details">
+      <div class="info-item">
+        <label>Full Name:</label>
+        <input type="text" id="fullname" value="—" disabled>
+      </div>
+      <div class="info-item">
+        <label>Email:</label>
+        <input type="email" id="email" value="example@email.com" disabled>
+      </div>
+      <div class="info-item">
+        <label>State:</label>
+        <input type="text" id="state" value="Maharashtra" disabled>
+      </div>
+      <div class="info-item">
+        <label>Aadhaar No:</label>
+        <input type="text" id="aadhaar" value="XXXX-XXXX-1234" disabled>
+      </div>
+      <div class="info-item">
+        <label>Mobile:</label>
+        <input type="text" id="mobile" value="+91 9876543210" disabled>
+      </div>
 
-    <div class="buttons">
-        <button class="edit-btn" onclick="enableEdit()">Edit</button>
-        <button class="save-btn" onclick="saveData()">Save</button>
+      <div class="btns">
+        <button onclick="enableEdit()">Edit</button>
+        <button onclick="saveProfile()">Save</button>
+      </div>
     </div>
 
     <footer>
-        🇮🇳 Proud Citizen of India | Digital Identity Portal 2025
+      &copy; 2025 Government of India | Digital Identity Portal
     </footer>
-</div>
+  </div>
 
-<script>
+  <script>
+    // ✅ Fetch username from localStorage and show on profile page
+    document.addEventListener('DOMContentLoaded', () => {
+      const username = localStorage.getItem('username') || "Citizen Name";
+      document.getElementById('usernameDisplay').textContent = username;
+      document.getElementById('fullname').value = username;
+    });
+
+    // Allow user to edit
     function enableEdit() {
-        document.querySelectorAll('.info-item input').forEach(input => {
-            input.disabled = false;
-        });
-        alert("Editing enabled. You can now update your details!");
+      document.querySelectorAll('.info-item input').forEach(input => input.disabled = false);
+      alert("Editing enabled. You can now update your details!");
     }
 
-    function saveData() {
-        const userData = {};
-        document.querySelectorAll('.info-item input').forEach(input => {
-            input.disabled = true;
-            userData[input.id] = input.value;
-        });
-        alert("✅ Data saved successfully!\n\n" + JSON.stringify(userData, null, 2));
-        console.log("Saved Data:", userData);
+    // Save edited data locally
+    function saveProfile() {
+      const profileData = {};
+      document.querySelectorAll('.info-item input').forEach(input => {
+        input.disabled = true;
+        profileData[input.id] = input.value;
+      });
+      localStorage.setItem('profileData', JSON.stringify(profileData));
+      alert("✅ Profile updated successfully!");
+      console.log(profileData);
     }
-</script>
-
+  </script>
 </body>
 </html>
