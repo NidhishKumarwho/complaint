@@ -23,7 +23,7 @@
       color: var(--dark);
     }
 
-    /* --- Navbar (unchanged) --- */
+    /* --- Navbar --- */
     nav {
       position: fixed;
       width: 100%;
@@ -178,18 +178,19 @@
 </head>
 
 <body>
-  <!-- Navbar (kept same as given) -->
+  <!-- Navbar -->
   <nav>
     <div class="logo">
       <img src="https://as1.ftcdn.net/v2/jpg/07/29/34/34/1000_F_729343438_gqEk9CipKxy5FVnabVTCyr65qGqM4Fv1.jpg" alt="logo">
       Government of India
-      </div>
+    </div>
     <ul>
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About Us</a></li>
-      <li><a href="#officials">officials</a></li>
+      <li><a href="#officials">Officials</a></li>
       <li><a href="complaint.html">Complaint</a></li>
-      <li><a href="#feedback.html">Feedback</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <!-- ✅ This link will change to username and go to profile.html when logged in -->
       <li><a id="loginLink" href="profile.html">Login</a></li>
     </ul>
   </nav>
@@ -241,22 +242,23 @@
         <p>Minister of Finance</p>
         <p>Driving India’s economic reforms and digital governance initiatives.</p>
       </div>
-<div class="official">
+
+      <div class="official">
         <img src="https://images.timesnownews.com/thumb/msid-152479270,thumbsize-983043,width-1280,height-720,resizemode-75/152479270.jpg" alt="C.P.Radhakrishnan">
         <h3>C.P.Radhakrishnan</h3>
         <p>Vice President of India</p>
-        <p> He previously served as the Governor of various states, and as a member of parliament.</p>
-</div>
-<div class="official">
+        <p>He previously served as the Governor of various states, and as a member of parliament.</p>
+      </div>
+
+      <div class="official">
         <img src="https://lawtrend.in/wp-content/uploads/2025/05/cji-gavai-1.jpg" alt="B.R.Gavai">
         <h3>B.R.Gavai</h3>
         <p>Chief Justice of India</p>
         <p>He is a former judge of the Bombay High Court and also currently serves as the chancellor of some National Law Universities</p>
-</div>
-
-
+      </div>
     </div>
   </section>
+
   <!-- Complaint Categories -->
   <section id="courses">
     <h2>Major Complaint Categories</h2>
@@ -284,15 +286,15 @@
     &copy; 2025 Government of India | Public Grievance Redressal Portal
   </footer>
 
-  <!-- 👇 Added script to show logged-in user name -->
+  <!-- ✅ Script for showing username & profile link -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const loginLink = document.getElementById('loginLink');
-      const username = localStorage.getItem('username'); // key from login page
+      const username = localStorage.getItem('username'); // stored from login page
 
       if (username) {
         loginLink.textContent = username;
-        loginLink.href = "profile.html";
+        loginLink.href = "profile.html"; // Redirects to profile page when clicked
         loginLink.style.fontWeight = "600";
       }
     });
