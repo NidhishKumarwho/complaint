@@ -3,51 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Your Grand Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <title>Sign Up - Grand Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* Reset and basic styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
+      height: 100%;
       font-family: 'Roboto', sans-serif;
-      color: #333;
-      background: linear-gradient(to bottom, #f5f0e1, #d6c7b8);
-      min-height: 100vh;
+      background: linear-gradient(to top, #0f2027, #203a43, #2c5364);
       display: flex;
       justify-content: center;
       align-items: center;
       overflow: hidden;
     }
 
-    .grand-container {
-      background: rgba(255, 255, 255, 0.95);
-      border: 5px solid #a67c52;
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .signup-container {
+      position: relative;
+      z-index: 1;
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-radius: 20px;
-      padding: 50px;
-      width: 80%;
-      max-width: 900px;
+      padding: 50px 40px;
+      width: 350px;
       text-align: center;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
       animation: fadeIn 1.5s ease-in-out;
+      color: #fff;
     }
 
     @keyframes fadeIn {
-      0% {opacity: 0; transform: translateY(-50px);}
+      0% {opacity: 0; transform: translateY(-40px);}
       100% {opacity: 1; transform: translateY(0);}
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3em;
-      color: #5a3e1b;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #ffd700;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
       animation: slideIn 1.2s ease forwards;
     }
 
@@ -56,59 +63,178 @@
       100% {opacity: 1; transform: translateY(0);}
     }
 
-    p {
-      font-size: 1.2em;
-      color: #5a3e1b;
-      line-height: 1.8;
+    p.subtitle {
       margin-bottom: 30px;
+      color: #f0e68c;
+      font-size: 0.95em;
     }
 
-    .btn {
-      background: #a67c52;
-      color: #fff;
-      padding: 15px 40px;
-      font-size: 1em;
+    .signup-container input {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
       border: none;
-      border-radius: 50px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .signup-container input::placeholder {
+      color: #ddd;
+    }
+
+    .signup-container button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #ffd700;
+      color: #0f2027;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
       transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 1em;
     }
 
-    .btn:hover {
-      background: #865c39;
+    .signup-container button:hover {
+      background-color: #e6c200;
       transform: scale(1.05);
     }
 
-    /* Subtle decorative element */
     .ornament {
-      width: 100px;
-      height: 5px;
-      background: #a67c52;
-      margin: 30px auto;
+      width: 80px;
+      height: 4px;
+      background: #ffd700;
+      margin: 20px auto;
       border-radius: 2px;
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
-      0% {transform: scaleX(1);}
+      0%,100% {transform: scaleX(1);}
       50% {transform: scaleX(1.5);}
-      100% {transform: scaleX(1);}
+    }
+
+    .login-link {
+      margin-top: 20px;
+      font-size: 0.9em;
+    }
+
+    .login-link a {
+      color: #00bfff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .password-container {
+      position: relative;
+    }
+
+    .toggle-eye {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #fff;
     }
 
   </style>
 </head>
 <body>
 
-  <div class="grand-container">
-    <h1>Welcome to Your Masterpiece</h1>
+  <canvas id="background"></canvas>
+
+  <div class="signup-container">
+    <h1>Create Your Account</h1>
     <div class="ornament"></div>
-    <p>
-      This is the space where your vision comes alive. Every element is designed to reflect sophistication and timeless elegance. Feel free to explore and shape it into your unique creation.
+    <p class="subtitle">Join us and experience elegance like never before.</p>
+    <form onsubmit="return handleSignUp(event)">
+      <input type="text" id="newUsername" placeholder="Username" required>
+      <div class="password-container">
+        <input type="password" id="newPassword" placeholder="Password" required>
+        <span class="toggle-eye" onclick="togglePassword()">👁️</span>
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p class="login-link">
+      Already have an account? <a href="login.html">Login here</a>
     </p>
-    <button class="btn" onclick="alert('Let the creation begin!')">Start Creating</button>
   </div>
+
+  <script>
+    function togglePassword() {
+      const password = document.getElementById("newPassword");
+      password.type = password.type === "password" ? "text" : "password";
+    }
+
+    function handleSignUp(event) {
+      event.preventDefault();
+      const username = document.getElementById("newUsername").value;
+      const password = document.getElementById("newPassword").value;
+
+      if(username && password){
+        // Save user info in localStorage (for demo purposes)
+        localStorage.setItem("loggedInUser", username);
+        localStorage.setItem("userType", "student");
+        localStorage.setItem("username", username);
+        alert("Account created successfully! Welcome, " + username);
+        window.location.href = "about.html"; // Redirect to a grand page after signup
+      }
+    }
+
+    // Background Animation
+    const canvas = document.getElementById("background");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const particles = [];
+    const numParticles = 120;
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedY = Math.random() * 1 + 0.5;
+      }
+      update() {
+        this.y -= this.speedY;
+        if(this.y + this.size < 0) this.reset();
+      }
+      draw() {
+        ctx.fillStyle = "rgba(255, 215, 0, 0.7)";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      for(let i=0;i<numParticles;i++){
+        particles.push(new Particle());
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{p.update(); p.draw();});
+      requestAnimationFrame(animateParticles);
+    }
+
+    initParticles();
+    animateParticles();
+  </script>
 
 </body>
 </html>
